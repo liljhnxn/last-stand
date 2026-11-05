@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 /**
  * @title LastStand
- * @notice Survival mini-game run recorder for Botchain Testnet.
+ * @notice Survival mini-game run recorder for Botchain Mainnet.
  * Tagline: One Life. One Chance. How Long Can You Survive?
  */
 contract LastStand {

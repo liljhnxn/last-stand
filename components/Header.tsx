@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import { useAccount, useConnect, useDisconnect, useBalance, useSwitchChain } from "wagmi";
-import { botchainTestnet } from "@/lib/botchain";
-import { ShieldAlert, Wallet, ExternalLink, LogOut, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { botchain } from "@/lib/botchain";
+import { BOTCHAIN_EXPLORER_URL } from "@/lib/contract/config";
+import { ShieldAlert, Wallet, ExternalLink, LogOut, AlertTriangle, CheckCircle2, Compass } from "lucide-react";
 
 export function Header() {
   const { address, isConnected, chainId } = useAccount();
@@ -12,12 +13,12 @@ export function Header() {
   const { switchChain, isPending: isSwitching } = useSwitchChain();
   const { data: balanceData } = useBalance({
     address,
-    chainId: botchainTestnet.id,
+    chainId: botchain.id,
   });
 
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const isWrongNetwork = isConnected && chainId !== botchainTestnet.id;
+  const isWrongNetwork = isConnected && chainId !== botchain.id;
 
   const handleConnect = () => {
     const injectedConnector = connectors.find((c) => c.id === "injected") || connectors[0];
@@ -58,26 +59,56 @@ export function Header() {
         </div>
 
         {/* Network & Wallet Controls */}
-        <div className="flex items-center gap-3">
-          {/* Botchain Testnet Badge */}
-          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface border border-white/10 text-xs">
-            <span
-              className={`w-2 h-2 rounded-full ${
-                isConnected
-                  ? isWrongNetwork
-                    ? "bg-amber-400 animate-pulse"
-                    : "bg-emerald-400 shadow-sm shadow-emerald-400"
-                  : "bg-gray-500"
-              }`}
+        <div className="flex items-center gap-2">
+          {/* BOT Chain Mainnet Badge */}
+          <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface border border-white/10 text-xs">
+            <img
+              src="/botchain-logo.png"
+              alt="BOT Chain"
+              className="w-4 h-4 rounded-full object-cover"
             />
-            <span className="text-gray-300 font-medium">Botchain Testnet</span>
-            <span className="text-gray-500 font-mono text-[10px]">(968)</span>
+            <span className="text-gray-300 font-medium">BOT Chain</span>
+            <span className="text-gray-500 font-mono text-[10px]">({botchain.id})</span>
           </div>
+
+          {/* BOT Chain Main Website Link */}
+          <a
+            href="https://botchain.ai"
+            target="_blank"
+            rel="noreferrer"
+            className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surface hover:bg-panel border border-white/10 text-xs font-mono text-gray-300 hover:text-white transition-colors"
+            title="BOT Chain Official Website"
+          >
+            <img
+              src="/botchain-logo.png"
+              alt="BOT Chain"
+              className="w-4 h-4 rounded-full object-cover shrink-0"
+            />
+            <span>botchain.ai</span>
+            <ExternalLink className="w-3 h-3 text-gray-500" />
+          </a>
+
+          {/* Mainnet Explorer Direct Link */}
+          <a
+            href="https://scan.botchain.ai"
+            target="_blank"
+            rel="noreferrer"
+            className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surface hover:bg-panel border border-white/10 text-xs font-mono text-gray-300 hover:text-white transition-colors"
+            title="Open BOT Chain Mainnet Explorer"
+          >
+            <img
+              src="/botchain-logo.png"
+              alt="BOT Chain"
+              className="w-4 h-4 rounded-full object-cover shrink-0"
+            />
+            <span>Explorer</span>
+            <ExternalLink className="w-3 h-3 text-gray-500" />
+          </a>
 
           {/* Network Warning Button if on wrong chain */}
           {isWrongNetwork && (
             <button
-              onClick={() => switchChain?.({ chainId: botchainTestnet.id })}
+              onClick={() => switchChain?.({ chainId: botchain.id })}
               disabled={isSwitching}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-medium hover:bg-amber-500/30 transition-colors"
             >
@@ -130,7 +161,7 @@ export function Header() {
                   </div>
 
                   <a
-                    href={`https://scan.bohr.life/address/${address}`}
+                    href={`${BOTCHAIN_EXPLORER_URL}/address/${address}`}
                     target="_blank"
                     rel="noreferrer"
                     className="flex items-center gap-2 px-3 py-2 mt-1 rounded-lg text-xs text-gray-300 hover:bg-white/5 transition-colors"

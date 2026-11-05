@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import confetti from "canvas-confetti";
 import { GameStatus } from "@/lib/game/types";
+import { BOTCHAIN_EXPLORER_URL } from "@/lib/contract/config";
 import {
   Trophy,
   Skull,
@@ -182,13 +183,13 @@ export function GameOver({
               <div>
                 <strong className="block font-semibold">Run Recorded On-Chain!</strong>
                 <span className="text-gray-300">
-                  Your score has been permanently stamped to Botchain Testnet.
+                  Your score has been permanently stamped to Botchain Mainnet.
                 </span>
               </div>
             </div>
             {savedTxHash && (
               <a
-                href={`https://scan.bohr.life/tx/${savedTxHash}`}
+                href={`${BOTCHAIN_EXPLORER_URL}/tx/${savedTxHash}`}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-mono text-xs transition-colors shrink-0"

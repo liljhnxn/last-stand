@@ -2,21 +2,23 @@
 
 > **Tagline:** *One Life. One Chance. How Long Can You Survive?*
 
-LastStand is a Web3 survival mini-game built on **Botchain Testnet**. Players navigate a series of up to 10 lethal encounters, choose each round whether to press forward or evacuate, and permanently record their survival records on-chain.
+LastStand is a Web3 survival mini-game built on **Botchain Mainnet**. Players navigate a series of up to 10 lethal encounters, choose each round whether to press forward or evacuate, and permanently record their survival records on-chain.
 
 The entire application runs on **one page**, connects to **one Solidity smart contract**, and requires **no centralized database or backend**.
 
 ---
 
-## 1. Network Configuration: Botchain Testnet
+## 1. Network Configuration: Botchain Mainnet
 
 | Setting | Value |
 |---|---|
-| **Network Name** | Botchain Testnet |
-| **Chain ID** | `968` |
-| **RPC Endpoint** | `https://rpc.bohr.life` |
-| **Block Explorer** | `https://scan.bohr.life` |
+| **Network Name** | Botchain Mainnet |
+| **Chain ID** | `677` |
+| **RPC Endpoint** | `https://rpc.botchain.ai` |
+| **Block Explorer** | `https://scan.botchain.ai` |
 | **Currency Symbol** | `BOT` |
+| **Total Supply** | 150 Million |
+| **Deployed Contract** | `0x59fd31fA96fdEA0aeb85F5E541Ab47bB8f91012a` |
 
 ---
 
@@ -33,9 +35,7 @@ The entire application runs on **one page**, connects to **one Solidity smart co
   - **CONTINUE:** Face the encounter. If survived, earn +1 point and advance. If fatal, the run terminates immediately.
   - **END RUN:** Voluntarily evacuate to bank your current score and lock in your survival record.
 - **Victory:** Complete all 10 rounds to achieve **Ultimate Victory**.
-- **On-Chain Recording:** Completed runs (both fatalities and voluntary evacuations) can be stamped to the smart contract on Botchain Testnet.
-
-> **Important Security Notice:** This first version is a testnet game. The browser controls the challenges and game results, so the game is not cheat-proof or provably fair.
+- **On-Chain Recording:** Completed runs (both fatalities and voluntary evacuations) can be stamped to the smart contract on Botchain Mainnet.
 
 ---
 
@@ -73,27 +73,24 @@ npx hardhat compile
 ```
 
 ### Step 3: Run the Hardhat Test Suite
-Run the automated test suite verifying contract integrity, input validation, run ID increments, and event emissions:
 ```bash
 npx hardhat test
 ```
 
-### Step 4: Deploy to Botchain Testnet
+### Step 4: Deploy to Botchain Mainnet
 1. Create a `.env` file from `.env.example`:
 ```bash
 cp .env.example .env
 ```
-2. Add your deployment private key funded with testnet `BOT` tokens:
+2. Add your deployment private key funded with `BOT` tokens:
 ```env
 PRIVATE_KEY=your_private_key_here
 ```
 3. Run the deployment script:
 ```bash
-npm run deploy:botchain
+npm run deploy:mainnet
 ```
 The script will output your deployed contract address and automatically save it to `lib/contract/deployed-address.json`.
-
-> ⚠️ **Important Note on Contract Immutability:** Updating the Solidity source code does **not** automatically update an already deployed contract on the blockchain. If you modify `LastStand.sol`, you must deploy a new contract instance and update the address in the frontend.
 
 ### Step 5: Run the Frontend Locally
 ```bash
@@ -108,7 +105,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 1. Push this repository to GitHub or GitLab.
 2. Import the project into [Vercel](https://vercel.com).
 3. Set the Environment Variable:
-   - `NEXT_PUBLIC_LASTSTAND_CONTRACT_ADDRESS`: (Your deployed contract address on Botchain Testnet)
+   - `NEXT_PUBLIC_LASTSTAND_CONTRACT_ADDRESS`: `0x59fd31fA96fdEA0aeb85F5E541Ab47bB8f91012a`
 4. Deploy! Next.js will build and serve the single-page application.
 
 ---

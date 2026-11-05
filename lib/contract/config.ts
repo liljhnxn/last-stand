@@ -7,5 +7,5 @@ export const LAST_STAND_CONTRACT_ADDRESS = (
   ""
 ) as `0x${string}`;
 
-export const BOTCHAIN_EXPLORER_URL = "https://scan.bohr.life";
-export const BOTCHAIN_CHAIN_ID = 968;
+export const BOTCHAIN_EXPLORER_URL = "https://scan.botchain.ai";
+export const BOTCHAIN_CHAIN_ID = 677;

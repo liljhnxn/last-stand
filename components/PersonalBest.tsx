@@ -22,7 +22,7 @@ export function PersonalBest({
     return (
       <div className="max-w-4xl mx-auto px-4 my-8">
         <div className="p-5 rounded-2xl bg-surface/60 border border-white/5 text-center text-xs text-gray-400">
-          Connect your wallet to track your on-chain Personal Best and survival history on Botchain Testnet.
+          Connect your wallet to track your on-chain Personal Best and survival history on Botchain Mainnet.
         </div>
       </div>
     );

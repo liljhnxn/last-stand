@@ -1,7 +1,7 @@
 {
   "name": "laststand",
   "version": "1.0.0",
-  "description": "LastStand - One Life. One Chance. How Long Can You Survive? A Web3 survival mini-game on Botchain Testnet.",
+  "description": "LastStand - One Life. One Chance. How Long Can You Survive? A Web3 survival mini-game on Botchain Mainnet.",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,6 +10,8 @@
     "lint": "next lint",
     "compile": "hardhat compile",
     "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.ts --network botchain",
+    "deploy:mainnet": "hardhat run scripts/deploy.ts --network botchain",
     "deploy:botchain": "hardhat run scripts/deploy.ts --network botchain"
   },
   "dependencies": {

@@ -5,11 +5,11 @@ import { Providers } from "@/components/Providers";
 export const metadata: Metadata = {
   title: "LastStand | One Life. One Chance. How Long Can You Survive?",
   description:
-    "LastStand is a Web3 survival mini-game on Botchain Testnet. Face 10 intense rounds of danger, push your luck, and record your survival legacy on-chain.",
+    "LastStand is a Web3 survival mini-game on Botchain Mainnet. Face 10 intense rounds of danger, push your luck, and record your survival legacy on-chain.",
   keywords: ["LastStand", "Botchain", "Web3 Game", "Survival Game", "Solidity", "BOT"],
   openGraph: {
     title: "LastStand - One Life. One Chance.",
-    description: "How long can you survive on Botchain Testnet?",
+    description: "How long can you survive on Botchain Mainnet?",
     type: "website",
   },
   icons: {

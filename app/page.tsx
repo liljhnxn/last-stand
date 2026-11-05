@@ -15,7 +15,8 @@ import {
 import { Challenge, GameStatus, RunHistoryItem } from "@/lib/game/types";
 import { LAST_STAND_ABI } from "@/lib/contract/LastStandABI";
 import { LAST_STAND_CONTRACT_ADDRESS } from "@/lib/contract/config";
-import { botchainTestnet } from "@/lib/botchain";
+import { botchain } from "@/lib/botchain";
+import { ExternalLink, Globe, Compass, Cpu } from "lucide-react";
 import {
   useAccount,
   useConnect,
@@ -27,7 +28,7 @@ import {
 export default function LastStandPage() {
   const { address, isConnected, chainId } = useAccount();
   const { connect, connectors } = useConnect();
-  const publicClient = usePublicClient({ chainId: botchainTestnet.id });
+  const publicClient = usePublicClient({ chainId: botchain.id });
 
   // Custom contract address state (defaults to compiled/env address)
   const [contractAddress, setContractAddress] = useState<string>(
@@ -58,7 +59,7 @@ export default function LastStandPage() {
   const { isLoading: isTxConfirming, isSuccess: isTxConfirmed } =
     useWaitForTransactionReceipt({
       hash: writeTxHash,
-      chainId: botchainTestnet.id,
+      chainId: botchain.id,
     });
 
   // On-Chain History & Personal Best State
@@ -169,7 +170,7 @@ export default function LastStandPage() {
       setIsHistoryError(true);
       const errObj = err as Error;
       setHistoryErrorMessage(
-        errObj?.message || "Could not read records from Botchain Testnet."
+        errObj?.message || "Could not read records from Botchain Mainnet."
       );
     } finally {
       setIsHistoryLoading(false);
@@ -369,30 +370,99 @@ export default function LastStandPage() {
         />
       </div>
 
-      {/* Footer */}
-      <footer className="w-full border-t border-white/5 py-6 px-4 mt-16 text-center text-xs text-gray-500 font-mono">
-        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div>
-            LastStand &copy; {new Date().getFullYear()} • Botchain Testnet (Chain ID 968)
+      {/* BOT Chain Ecosystem Section & Footer */}
+      <footer className="w-full border-t border-white/10 pt-12 pb-8 px-4 mt-20 bg-[#060709]/90">
+        <div className="max-w-4xl mx-auto">
+          {/* Ecosystem Showcase Card */}
+          <div className="p-6 sm:p-8 rounded-3xl bg-surface/70 border border-white/10 shadow-xl backdrop-blur-sm mb-10">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              {/* BOT Chain Brand & Logo */}
+              <div className="flex items-center gap-4">
+                <div className="relative flex items-center justify-center w-12 h-12 rounded-2xl bg-black border border-emerald-500/30 shadow-lg shadow-emerald-950/40 overflow-hidden">
+                  <img
+                    src="/botchain-logo.png"
+                    alt="BOT Chain Logo"
+                    className="w-full h-full object-contain p-1"
+                  />
+                  <span className="absolute -bottom-0.5 -right-0.5 flex h-2.5 w-2.5">
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+                  </span>
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg font-black tracking-wider text-white">
+                      BOT <span className="text-emerald-400">CHAIN</span>
+                    </span>
+                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-semibold">
+                      Mainnet
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-400 mt-0.5">
+                    High-speed EVM blockchain • Chain ID: <span className="font-mono text-gray-300">677</span> • Native Token: <span className="font-mono text-gray-300">BOT</span>
+                  </p>
+                </div>
+              </div>
+
+              {/* Required BOT Chain Ecosystem Links */}
+              <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                <a
+                  href="https://botchain.ai"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-xs font-semibold text-white transition-all transform active:scale-95 shadow-sm"
+                >
+                  <img
+                    src="/botchain-logo.png"
+                    alt="BOT Chain"
+                    className="w-4 h-4 rounded-full object-cover shrink-0"
+                  />
+                  <span>BOT Chain Website</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-gray-400" />
+                </a>
+
+                <a
+                  href="https://scan.botchain.ai"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600/20 to-purple-600/20 hover:from-emerald-600/30 hover:to-purple-600/30 border border-emerald-500/30 text-xs font-semibold text-emerald-300 hover:text-emerald-200 transition-all transform active:scale-95 shadow-sm"
+                >
+                  <img
+                    src="/botchain-logo.png"
+                    alt="BOT Chain"
+                    className="w-4 h-4 rounded-full object-cover shrink-0"
+                  />
+                  <span>BOT Chain Explorer</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-emerald-400/70" />
+                </a>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-4">
-            <a
-              href="https://scan.bohr.life"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-gray-300 transition-colors"
-            >
-              Botchain Explorer
-            </a>
-            <span>•</span>
-            <a
-              href="https://rpc.bohr.life"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-gray-300 transition-colors"
-            >
-              RPC Endpoint
-            </a>
+
+          {/* Sub-Footer Links & Legal */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500 font-mono pt-4 border-t border-white/5">
+            <div>
+              LastStand &copy; {new Date().getFullYear()} • Built natively on BOT Chain Mainnet
+            </div>
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href={`https://scan.botchain.ai/address/${contractAddress || LAST_STAND_CONTRACT_ADDRESS}`}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-emerald-400 transition-colors inline-flex items-center gap-1"
+              >
+                <span>Contract Explorer</span>
+                <ExternalLink className="w-3 h-3 text-gray-600" />
+              </a>
+              <span>•</span>
+              <a
+                href="https://rpc.botchain.ai"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-emerald-400 transition-colors"
+              >
+                RPC: rpc.botchain.ai
+              </a>
+            </div>
           </div>
         </div>
       </footer>

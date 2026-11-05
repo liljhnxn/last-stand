@@ -67,7 +67,7 @@ export function RecentRuns({
               )}
             </h2>
             <p className="text-xs text-gray-400 font-mono">
-              Direct verification from Botchain Testnet contract
+              Direct verification from Botchain Mainnet contract
             </p>
           </div>
         </div>

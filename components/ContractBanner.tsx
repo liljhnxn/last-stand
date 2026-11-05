@@ -38,7 +38,11 @@ export function ContractBanner({
     <div className="max-w-4xl mx-auto px-4 mt-6">
       <div className="p-3.5 rounded-2xl bg-surface/80 border border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2.5">
-          <div className="w-2 h-2 rounded-full bg-purple-400" />
+          <img
+            src="/botchain-logo.png"
+            alt="BOT Chain"
+            className="w-4 h-4 rounded-full object-cover shrink-0"
+          />
           <span className="font-mono text-gray-400 uppercase tracking-wider text-[11px]">
             Contract:
           </span>
@@ -90,7 +94,7 @@ export function ContractBanner({
           className="mt-3 p-4 rounded-2xl bg-panel border border-white/10 text-xs animate-fadeIn"
         >
           <label className="block text-gray-300 font-semibold mb-1">
-            LastStand Smart Contract Address (Botchain Testnet)
+            LastStand Smart Contract Address (Botchain Mainnet)
           </label>
           <p className="text-gray-400 text-[11px] mb-3">
             Paste your deployed contract address here, or run{" "}
@@ -101,7 +105,7 @@ export function ContractBanner({
               type="text"
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
-              placeholder="0x..."
+              placeholder="0x59fd31fA96fdEA0aeb85F5E541Ab47bB8f91012a"
               className="flex-1 bg-surface border border-white/10 rounded-xl px-3 py-2 text-white font-mono text-xs focus:outline-none focus:border-purple-500"
             />
             <button

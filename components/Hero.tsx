@@ -146,7 +146,7 @@ export function Hero({ onStartSurvival, isConnected, onConnectWallet }: HeroProp
 
             {/* Required Security Disclaimer */}
             <div className="p-3.5 rounded-xl bg-panel border border-white/10 text-gray-400 text-[11px] leading-relaxed">
-              <strong className="text-gray-200">Security Note:</strong> This first version is a testnet game. The browser controls the challenges and game results, so the game is not cheat-proof or provably fair.
+              <strong className="text-gray-200">Security Note:</strong> The browser controls the challenges and game results, and records verified outcomes to Botchain Mainnet. Future updates will introduce on-chain VRF randomness.
             </div>
           </div>
         )}
